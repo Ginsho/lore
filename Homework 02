@@ -1,0 +1,118 @@
+# JUST 'SELECT' AND PRESS 'CTRL' + '/' TO HIDE CODE AS A COMMENT
+# TASK 1 ____________________________________________________
+a = 1
+b = 2.0
+c = "один"
+d = [2, 3, 4]
+e = (5, 'program', 1 + 3j)
+f = set(c)
+g = {1: 'value', 2: 'key'}
+
+print("1 >>>", a)
+print("2 >>>", b)
+print("3 >>>", c)
+print("4 >>>", d)
+print("5 >>>", e)
+print("6 >>>", f)
+print("7 >>>", g)
+types_array = [0, a, b, c, d, e, f, g]
+user_choice = int(input("Which element's type() should I show? >>> "))
+while (user_choice > 7) or (user_choice < 1):
+    user_choice = int(input("Incorrect choice! Which element's type() should I show? Chose from 1 to 7 >>> "))
+
+print(type(types_array[user_choice]))
+print(types_array)
+
+# TASK 2 ____________________________________________________
+user_list = []
+stop = 0
+number_of_list_items = 0
+
+while stop == 0:
+    list_item = input("Type to add a list element >>> ")
+    user_list.append(list_item)
+    stop = int(input("Enter '0' to add another list item or any key to stop >>> "))
+    number_of_list_items += 1
+if len(user_list)%2 == 0:
+    reverse_list = [user_list[i ^ 1] for i in range(len(user_list))]
+else:
+    reverse_list = [user_list[i ^ 1] for i in range(len(user_list)-1)]
+    reverse_list.append(user_list[len(user_list)-1])
+print(reverse_list)
+
+# TASK 3.1 LIST ____________________________________________________
+user_choice = int(input("Enter the month's number and I'll name you the season. Type whole number from 1 to 12  >>> "))
+seasons = ["Winter", "Spring", "Summer", "Autumn"]
+target_season = 0
+while (user_choice > 12) or (user_choice < 1):
+    user_choice = int(input("Incorrect! Type whole number from 1 to 12 >>> "))
+if (user_choice <= 2) or (user_choice == 12):
+    target_season = seasons[0]
+elif (user_choice <= 5) or (user_choice > 2):
+    target_season = seasons[1]
+elif (user_choice <= 8) or (user_choice > 5):
+    target_season = seasons[2]
+elif (user_choice <= 11) or (user_choice > 8):
+    target_season = seasons[3]
+print(f"It's going to be {target_season}!")
+
+# TASK 3.2 DICT ____________________________________________________
+seasons = {0: "Error", 1: "Winter", 12: "Winter", 2: "Winter", 3: "Spring", 4: "Spring", 5: "Spring", 6: "Summer", 7: "Summer", 8: "Summer", 9: "Spring", 10: "Summer", 11: "Summer"}
+user_choice = int(input("Enter the month's number and I'll name you the season. Type whole number from 1 to 12  >>> "))
+while (user_choice > 12) or (user_choice < 1):
+    user_choice = int(input("Incorrect! Type whole number from 1 to 12 >>> "))
+
+print(f"It's going to be {seasons[user_choice]}!")
+
+# TASK 4 ____________________________________________________
+user_str = input("Enter your phrase >>>  ")
+user_word = []
+num = 1
+for item in range(user_str.count(' ') + 1):
+    user_word = user_str.split()
+    if len(str(user_word)) <= 10:
+        print(f" {num} {user_word [item]}")
+        num += 1
+    else:
+        print(f" {num} {user_word [item] [0:10]}")
+        num += 1
+
+# TASK 5 ____________________________________________________
+my_list = [7, 5, 3, 3, 2]
+print(my_list)
+print(len(my_list))
+x = len(my_list)
+list_item = int(input("Enter a positive whole number >>> "))
+while list_item < 1:
+    list_item = int(input("Incorrect! Type positive whole number >>> "))
+while (x > 0) and (list_item > my_list[x-1]):
+    x -= 1
+if (list_item <= my_list[x-1]) or (x == 0):
+    my_list.insert(x, list_item)
+print(my_list)
+
+# TASK 6 ____________________________________________________
+goods = []
+specifications = {'Name': '', 'Price': '', 'Quantity': '', 'Unit': ''}
+data = {'Name': [], 'Price': [], 'Quantity': [], 'Unit': []}
+num = 0
+specification_ = None
+control = None
+while True:
+    raw_data = input("Now press 'Enter' to continue and input data. Also you may press 'A' to analyse data. Otherwise press 'Q' to quite >>> ").upper()
+    if raw_data == 'Q':
+        break
+    num += 1
+    if raw_data == 'A':
+        print(f'\nData structure \n{"_" * 50}')
+        for key, value in data.items():
+            print(f'{key}: {value}')
+            print("_" * 50)
+    if raw_data == 'A':
+        break
+    for f in specifications.keys():
+        specification_ = input(f'Input feature "{f}" >>> ')
+        specifications[f] = int(specification_) if (f == 'Price' or f == 'Quantity') else specification_
+        data[f].append(specifications[f])
+    goods.append((num, specifications))
+
