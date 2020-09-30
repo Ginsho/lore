@@ -31,7 +31,7 @@ number_of_list_items = 0
 while stop == 0:
     list_item = input("Type to add a list element >>> ")
     user_list.append(list_item)
-    stop = int(input("Enter '0' to add another list item or any key to stop >>> "))
+    stop = int(input("Enter '0' to add another list item or '1' to stop >>> "))
     number_of_list_items += 1
 if len(user_list)%2 == 0:
     reverse_list = [user_list[i ^ 1] for i in range(len(user_list))]
@@ -46,18 +46,18 @@ seasons = ["Winter", "Spring", "Summer", "Autumn"]
 target_season = 0
 while (user_choice > 12) or (user_choice < 1):
     user_choice = int(input("Incorrect! Type whole number from 1 to 12 >>> "))
-if (user_choice <= 2) or (user_choice == 12):
+if (user_choice == 1) or (user_choice == 2) or (user_choice == 12):
     target_season = seasons[0]
-elif (user_choice <= 5) or (user_choice > 2):
+elif (user_choice == 3) or (user_choice == 4) or (user_choice == 5):
     target_season = seasons[1]
-elif (user_choice <= 8) or (user_choice > 5):
+elif (user_choice == 6) or (user_choice == 7) or (user_choice == 8):
     target_season = seasons[2]
-elif (user_choice <= 11) or (user_choice > 8):
+elif (user_choice == 9) or (user_choice == 10) or (user_choice == 11):
     target_season = seasons[3]
 print(f"It's going to be {target_season}!")
 
 # TASK 3.2 DICT ____________________________________________________
-seasons = {0: "Error", 1: "Winter", 12: "Winter", 2: "Winter", 3: "Spring", 4: "Spring", 5: "Spring", 6: "Summer", 7: "Summer", 8: "Summer", 9: "Spring", 10: "Summer", 11: "Summer"}
+seasons = {0: "Error", 1: "Winter", 12: "Winter", 2: "Winter", 3: "Spring", 4: "Spring", 5: "Spring", 6: "Summer", 7: "Summer", 8: "Summer", 9: "Autumn", 10: "Autumn", 11: "Autumn"}
 user_choice = int(input("Enter the month's number and I'll name you the season. Type whole number from 1 to 12  >>> "))
 while (user_choice > 12) or (user_choice < 1):
     user_choice = int(input("Incorrect! Type whole number from 1 to 12 >>> "))
@@ -80,7 +80,7 @@ for item in range(user_str.count(' ') + 1):
 # TASK 5 ____________________________________________________
 my_list = [7, 5, 3, 3, 2]
 print(my_list)
-print(len(my_list))
+
 x = len(my_list)
 list_item = int(input("Enter a positive whole number >>> "))
 while list_item < 1:
