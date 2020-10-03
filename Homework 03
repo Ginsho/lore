@@ -1,0 +1,92 @@
+# Task 1 ____________________________________________________
+def div(*args):
+    try:
+        x = int(input("Enter numerator >>>  "))
+        y = int(input("Enter denominator "))
+        res = x / y
+    except ValueError:
+        return 'Something went wrong: value error!'
+    except ZeroDivisionError:
+        return "Incorrect denominator! Numerator cannot be divided by '0'"
+
+    return res
+
+print(f'Final result is - {div()}')
+
+# Task 2 ____________________________________________________
+print("Now you may enter requested data and at the end you get the full list in one line")
+def my_func(name, surname, year, city, email, telephone):
+    return ' '.join([name, surname, year, city, email, telephone])
+
+print(f"{my_func(input('Enter name here >>> '), input('Enter surname here >>> '), input('Enter year here >>> '), input('Enter city here >>> '), input('Enter e-mail here >>> '), input('Enter telephone here >>> '))}")
+
+# Task 3 ____________________________________________________
+print("Now you may enter three numbers and at the end you get the sum of the biggest two")
+def my_func(argument1, argument2, argument3):
+    if argument1 >= argument3 and argument2 >= argument3:
+        return argument1 + argument2
+    elif argument1 > argument2 and argument1 < argument3:
+        return argument1 + argument3
+    else:
+        return argument2 + argument3
+
+print(f'The final result is - {my_func(int(input("Enter first argument here >>> ")), int(input("Enter second argument here >>> ")), int(input("Enter third argument here >>> ")))}')
+
+# Task 4.1 ____________________________________________________
+print("Now you may enter two whole numbers - FIRST should be positive and the SECOND negative - and at the end you get the '1-st' number exponentiated in '2-nd' number times")
+def my_func(x, y):
+    x = int(x) // 1
+    y = int(y) // 1
+    if x > 0 and y < 0:
+        y = abs(y)
+        return x ** y
+    else:
+        print("You've entered wrong numbers! Try again.")
+
+print(f'The final result is - {my_func(input("Enter first number here >>> "), input("Enter second number here >>> "))}')
+
+# Task 4.2 ____________________________________________________
+print("Now you may enter two whole numbers - FIRST should be positive and the SECOND negative - and at the end you get the '1-st' number exponentiated in '2-nd' number times")
+def my_func(x, y):
+    x = int(x) // 1
+    y = int(y) // 1
+    if x > 0 and y < 0:
+        y = abs(y)
+        result = pow(x, y)
+        return result
+    else:
+        print("You've entered wrong numbers! Try again.")
+
+print(f'The final result is - {my_func(input("Enter first number here >>> "), input("Enter second number here >>> "))}')
+
+# Task 5 ____________________________________________________
+import sys
+print("Now you may enter some numbers and at the end you get their sum as a result")
+result = 0
+while True:
+    user_num = input("Enter your number or 'Q' to stop: ").upper()
+    tokens = user_num.split(" ")
+    for token in tokens:
+        try:
+            number = float(token)
+            result += number
+        except:
+            if token == 'Q':
+                print(f"Final sum  is {result}.")
+                exit(0)
+            else:
+                print(f"Final sum is {result}. Input error", file=sys.stderr)
+                exit(1)
+                
+# Task 6 ____________________________________________________
+print("Now you may enter a string of words separated by a space. At the end, you will receive a list containing all the words of your sentence as single capitalized items")
+def int_func(x):
+    separate_word = x.split(' ')
+    total = []
+    for i in separate_word:
+        string_element = str(i)
+        first_letter = string_element[:1].upper()
+        word = first_letter + string_element[1:]
+        total.append(word)
+    return total
+print(f'{int_func(input("Print your phrase here >>> "))}')
