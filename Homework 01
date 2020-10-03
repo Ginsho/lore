@@ -1,0 +1,104 @@
+# Task_01 _______________________________________________
+exVar01 = 1
+exVar02 = 2
+exVar03 = "TEXT"
+print(exVar01, exVar02, exVar03)
+
+usrNum01 = int(input("Enter your first number >>> "))
+usrNum02 = int(input("Enter your second number >>> "))
+usrStr01 = input("Enter your first name >>> ")
+usrStr02 = input("Enter your last name >>> ")
+
+print(f"Dear {usrStr01} {usrStr02}, you've entered {usrNum01} and {usrNum02}")
+
+# Task_02 _______________________________________________
+usrSec = int(input("Enter the amount of seconds >>> "))
+while usrSec != usrSec//1:
+    usrSec = int(input("Wrong! Enter your whole positive number >>> "))
+while usrSec < 0:
+    usrSec = int(input("Wrong! Enter your whole positive number >>> "))
+usrMin = 00
+usrHrs = 00
+if usrSec >= 60:
+    usrMin = usrSec // 60
+    usrSec = usrSec - (usrMin*60)
+    if usrMin >= 60:
+        usrHrs = usrMin // 60
+        usrMin = usrMin - (usrHrs*60)
+print(f"This will be {usrHrs}:{usrMin}:{usrSec} hours")
+
+# Task_03 _______________________________________________
+usrNum03 = int(input("Enter your number >>> "))
+while usrNum03 != usrNum03//1:
+    usrNum03 = int(input("Wrong! Enter your whole positive number >>> "))
+while usrNum03 < 0:
+    usrNum03 = int(input("Wrong! Enter your whole positive number >>> "))
+num01 = usrNum03
+num02 = int(f"{usrNum03}{usrNum03}")
+num03 = int(f"{usrNum03}{usrNum03}{usrNum03}")
+print(num01+num02+num03)
+
+# Task_04 _______________________________________________
+usrNum04 = int(input("Enter your whole positive number >>> "))
+maxNum = 0
+while usrNum04 != usrNum04//1:
+    usrNum04 = int(input("Wrong! Enter your whole positive number >>> "))
+while usrNum04 < 0:
+    usrNum04 = int(input("Wrong! Enter your whole positive number >>> "))
+while usrNum04 > 0:
+    xNum = usrNum04 % 10
+    if maxNum < xNum:
+        maxNum = xNum
+    usrNum04 = usrNum04 // 10
+print(f"The biggest number is {maxNum}")
+
+# Task_05 _______________________________________________
+proceeds = int(input("Enter the amount of yours proceeds >>> "))
+while proceeds < 0:
+    proceeds = int(input("Wrong! Enter your whole positive number >>> "))
+costs = int(input("Enter the amount of yours costs >>> "))
+while costs < 0:
+    costs = int(input("Wrong! Enter your whole positive number >>> "))
+profit = proceeds - costs
+profitability = profit / proceeds
+check = 0
+if proceeds > costs:
+    check = 1
+    print("The total amount of yours proceeds is greater than the total amount of yours costs")
+elif proceeds == costs:
+    print("The total amount of yours proceeds is equal to the total amount of yours costs")
+else:
+    print("The total amount of yours proceeds is less than the total amount of yours costs")
+if check == 1:
+    print(f"The total amount of your company's profit is {profit}")
+    empNum = int(input("Now please enter the number of employees in you company >>> "))
+    while empNum != empNum//1:
+        empNum = int(input("Wrong! Enter your whole positive number >>> "))
+    while empNum < 0:
+        empNum = int(input("Wrong! Enter your whole positive number >>> "))
+    print(f"The amount of profitability per employee in your company is equal to the {profit/empNum} and the profitability is {profitability}")
+
+# Task_06 _______________________________________________
+aKM = int(input("How many kilometers did the man ran at the first day?>>> "))
+while aKM != aKM//1:
+        aKM = int(input("Wrong! Enter your whole positive number >>> "))
+while aKM < 0:
+        aKM = int(input("Wrong! Enter your whole positive number >>> "))
+while aKM > 30:
+        aKM = int(input("That's too much! Please, enter more realistic number >>> "))
+bKM = int(input("What is the target amount of kilometers per run?>>> "))
+while bKM <= aKM:
+        bKM = int(input("Wrong! it's equal or smaller than the first number! Please, enter more realistic number >>> "))
+while bKM != bKM//1:
+        bKM = int(input("Wrong! Enter your whole positive number >>> "))
+while bKM < 0:
+        bKM = int(input("Wrong! Enter your whole positive number >>> "))
+while bKM > 30:
+        bKM = int(input("That's too much! Please, enter more realistic number >>> "))
+day = 1
+while aKM < bKM:
+    print(f"{day} day result is: {aKM}")
+    aKM = aKM + (aKM/10)
+    day += 1
+print(f"{day} day result is: {aKM}")
+print(f"The man will reach the target amount of km/day on the {day} day!")
