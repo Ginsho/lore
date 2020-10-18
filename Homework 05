@@ -1,0 +1,134 @@
+# TASK 01 _________________________________________
+text_func = open('test.txt', 'w')
+text = input('Please, enter your text >>> ') + " "
+while text:
+    text_func.writelines(text)
+    text = input('Please, enter your text >>> ')
+    if not text:
+        break
+    else:
+        text = text + ' '
+text_func.close()
+text_func = open('test.txt', 'r')
+content = text_func.readlines()
+print(content)
+text_func.close()
+
+# TASK 02 _________________________________________
+text_list = ['First element\n', 'Second element\n', 'Third element\n', 'Forth element\n']
+# print(f"{text_list[0]}{text_list[1]}{text_list[2]}{text_list[3]}")
+with open("test_2.txt", 'w+') as file_obj:
+    file_obj.writelines(text_list)
+with open("test_2.txt") as file_obj:
+    lines = 0
+    letters = 0
+    for line in file_obj:
+        lines += line.count("\n")
+        letters = len(line)-1
+        print(f"There are {letters} letters in line '{line}'")
+    print(f"There are {lines} strings at all")
+
+# TASK 03.1 _______________________________________
+guards = {'Vimes': 37000, 'Colon': 21000, 'Nobbs': 19000, 'Ironfoundersson': 25000, 'Angua von Uberwald': 24000, 'Detritus': 20000}
+try:
+    file_obj = open("test_4.txt", 'w')
+    for last_name, salary in guards.items():
+        file_obj.write(last_name + ':' + str(salary) + "\n")
+except IOError:
+    print("An input / output error has occurred!")
+finally:
+    file_obj.close()
+salary_summ = 0
+count = 0
+employees = []
+with open("test_4.txt", "r") as file_obj:
+    for line in file_obj:
+        print(line, end="")
+        tokens = line.split(':')
+        if int(tokens[1]) <= 20000:
+            employees.append(tokens[0])
+        salary_summ += int(tokens[1])
+        count += 1
+result = salary_summ / count
+print(f"Socially disadvantaged employees : {employees}")
+print(f"Salary average value: {result}")
+
+# TASK 03.2 _______________________________________
+translater = {'One': 'Один', 'Two': 'Два', 'Three': 'Три', 'Four': 'Четыре'}
+my_list = []
+result = []
+try:
+    file_obj = open("test_3.2_output.txt", 'r')
+    for line in file_obj:
+        tokens = line.split(" - ")
+        print(tokens)
+        if tokens[0] in translater:
+            word = translater[tokens[0]]
+            result.append(word +' - '+ tokens[1])
+    print(result)
+except IOError:
+    print("An input / output error has occurred!")
+finally:
+    file_obj.close()
+
+try:
+    file_input = open("test_3.2_input.txt", "w")
+    file_input.writelines(result)
+except IOError:
+    print("An input / output error has occurred!")
+finally:
+    file_input.close()
+
+# TASK 04 _________________________________________
+def summary():
+    try:
+        with open('test_4.txt', 'w+') as file_obj:
+            line = input('Введите цифры через пробел \n')
+            file_obj.writelines(line)
+            my_numb = line.split()
+
+            print(sum(map(int, my_numb)))
+    except IOError:
+        print('Ошибка в файле')
+    except ValueError:
+        print('Неправильно набран номер. Ошибка ввода-вывода')
+summary()
+
+# TASK 05 _________________________________________
+subj = {}
+with open('test_5.txt', 'r') as init_f:
+    for line in init_f:
+        subject, lecture, practice, lab = line.split()
+        subj[subject] = int(lecture) + int(practice) + int(lab)
+    print(f'Общее количество часов по предмету - \n {subj}')
+
+# TASK 06 _________________________________________
+import json
+profit = {}
+pr = {}
+prof = 0
+prof_aver = 0
+i = 0
+with open('test_6.txt', 'r') as file:
+    for line in file:
+        Name, Firm, Earnings, Damage = line.split()
+        profit[Name] = int(Earnings) - int(Damage)
+        if profit.setdefault(Name) >= 0:
+            prof = prof + profit.setdefault(Name)
+            i += 1
+    if i != 0:
+        prof_aver = prof / i
+        print(f'Average profit - {prof_aver:.2f}')
+    else:
+        print(f'No profit - company works at a loss')
+    pr = {'Average profit': round(prof_aver)}
+    profit.update(pr)
+    print(f'The profit of each company - {profit}')
+
+with open('test_6.json', 'w') as write_js:
+    json.dump(profit, write_js)
+
+    js_str = json.dumps(profit)
+    print(f'Created a json file with the following content: \n '
+          f' {js_str}')
+
