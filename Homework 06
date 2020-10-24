@@ -1,0 +1,312 @@
+# Task 1 _______________________________________
+
+import time
+
+
+class TrafficLight:
+    color_cycling = {'Green': 7, 'Yellow': 2, 'Scarlet': 7}
+    current_color = None
+    count_index = 0
+    change_count = 3
+
+    def __init__(self, init_color='Scarlet', change_count=3):
+        self.current_color = init_color if self.color_cycling.get(init_color) else list(self.color_cycling.keys())[self.count_index]
+        self.count_index = list(self.color_cycling.keys()).index(self.current_color)
+        self.change_count = change_count
+
+    def running(self):
+        print(self.current_color)
+        while self.change_count:
+            time.sleep(self.color_cycling.get(self.current_color))
+            self.count_index = (self.count_index + 1) % 3
+            self.current_color = list(self.color_cycling.keys())[self.count_index]
+            print(self.current_color)
+            self.change_count -= 1
+
+
+if __name__ == '__main__':
+    while True:
+        change_count = input('How many times should we change traffic lights? >>> ')
+        try:
+            change_count = int(change_count)
+            break
+        except ValueError as e:
+            print('Please, enter whole positive number')
+    lights = TrafficLight('Attention!', change_count)
+    lights.running()
+
+# Task 2 _______________________________________
+class Road:
+    asphalt_density = 10
+    while True:
+        asphalt_density = input('Please, input weight of asphalt surface of one square meter 1 cm thick >>> ')
+        try:
+            asphalt_density = int(asphalt_density)
+            break
+        except ValueError as e:
+            print('Please, enter whole positive number')
+
+    def __init__(self, length, width):
+        self._length = length
+        self._width = width
+
+    def weight(self, depth):
+        return depth * self.asphalt_density * self._width * self._length
+
+
+if __name__ == '__main__':
+    Moscow_Vladivostok_subway = Road(9146, 12)
+    print("In case of using asphalt with such density coefficient for Moscow - Vladivostok subway we need:")
+    print(f'{Moscow_Vladivostok_subway.weight(5)} tonnes of raw material')
+    print(f"for {Moscow_Vladivostok_subway._length} km. road")
+    print(f"with {Moscow_Vladivostok_subway._width} m. average width.")
+
+# Task 3 _______________________________________
+class Worker:
+
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = {"wage": wage, "bonus": bonus}
+
+
+class Position(Worker):
+
+    def __init__(self,  name, surname, position, wage, bonus):
+        super().__init__(name, surname, position, wage, bonus)
+
+    def get_full_name(self):
+        return f'Full name: {self.surname} {self.name}'
+
+    def get_total_income(self):
+        return sum(self._income.values())
+
+
+if __name__ == '__main__':
+    employee = Position('Gadya', 'Khrenova', 'Lost girl', 14210, 1512)
+    employee_2 = Position('', 'Karlsson', 'A man in his prime', 23567, 3575)
+    print(employee.get_full_name())
+    print(f'Total income: {employee.get_total_income()}')
+    print(employee._income)
+    print(employee.position)
+    print("________________")
+    print(employee_2.get_full_name())
+    print(f'Total income: {employee_2.get_total_income()}')
+    print(employee_2._income)
+    print(employee_2.position)
+
+# Task 4 _______________________________________
+
+class Car:
+    __speed = 0
+    __direction = None
+
+    def __init__(self, speed, color, name, is_police):
+        self.__speed = speed
+        self.speed = 0
+        self.color = color
+        self.name = name
+        self.is_police = is_police
+
+    def go(self):
+        self.speed = self.__speed
+
+    def stop(self):
+        self.speed = 0
+
+    def turn(self, direction):
+        pass
+
+    def show_speed(self):
+        print(f'Current vehicle speed {self.name}: {self.speed}км/ч')
+
+
+class TownCar(Car):
+    MAX_SPEED = 60
+    print("Speed limit is 60")
+    def __init__(self, speed, color, name):
+        super().__init__(speed, color, name, False)
+
+    def show_speed(self):
+        if self.speed > self.MAX_SPEED:
+            print(f'Speeding by car {self.name}!')
+        print(f'Current vehicle speed {self.name}: {self.speed}км/ч')
+
+
+class SportCar(Car):
+
+    def __init__(self, speed, color, name):
+        super().__init__(speed, color, name, False)
+
+
+class WorkCar(Car):
+    MAX_SPEED = 40
+    print('Max speed for industrial car is 40')
+    def __init__(self, speed, color, name):
+        super().__init__(speed, color, name, False)
+
+    def show_speed(self):
+        if self.speed > self.MAX_SPEED:
+            print(f'Speeding by car {self.name}!')
+        print(f'Current vehicle speed {self.name}: {self.speed}км/ч')
+
+
+class PoliceCar(Car):
+
+    def __init__(self, speed, color, name):
+        super().__init__(speed, color, name, True)
+
+
+if __name__ == '__main__':
+    pc = PoliceCar(130, 'black', 'N80-5VB')
+    wc1 = WorkCar(37, 'red', 'LEO 19 87')
+    wc2 = WorkCar(120, 'green', 'b123cd')
+    mv = SportCar(365, 'dark blue', 'MVerstappen')
+    tc1 = TownCar(120, 'gray', 'B141PX52')
+    tc2 = TownCar(170, 'black', 'O248BM77')
+    pc.show_speed()
+    pc.go()
+    pc.show_speed()
+    pc.stop()
+    print(pc.color)
+    pc.go()
+    print(pc.name)
+    wc1.go()
+    wc2.go()
+    mv.go()
+    tc1.go()
+    tc2.go()
+    wc1.show_speed()
+    wc2.show_speed()
+    mv.show_speed()
+    tc1.show_speed()
+    tc2.show_speed()
+
+# Task 5 _______________________________________
+class Car:
+    # atributes
+    def __init__(self, speed, color, name, is_police):
+        self.speed = speed
+        self.color = color
+        self.name = name
+        self.is_police = is_police
+
+    # methods
+    def go(self):
+        return f"{self.name}'s started moving"
+
+    def stop(self):
+        return f"{self.name}'s stopped moving"
+
+    def turn_right(self):
+        return f'{self.name} turned right'
+
+    def turn_left(self):
+        return f'{self.name} turned left'
+
+    def show_speed(self):
+        return f'Current speed {self.name} is {self.speed}'
+
+
+class TownCar(Car):
+    def __init__(self, speed, color, name, is_police):
+        super().__init__(speed, color, name, is_police)
+
+    def show_speed(self):
+        print(f'Current speed of town car {self.name} is {self.speed}')
+
+        if self.speed > 40:
+            return f'Speed of {self.name} is higher than allow for town car'
+        else:
+            return f'Speed of {self.name} is normal for town car'
+
+class SportCar(Car):
+    def __init__(self, speed, color, name, is_police):
+        super().__init__(speed, color, name, is_police)
+
+
+class WorkCar(Car):
+    def __init__(self, speed, color, name, is_police):
+        super().__init__(speed, color, name, is_police)
+
+    def show_speed(self):
+        print(f'Current speed of work car {self.name} is {self.speed}')
+
+        if self.speed > 60:
+            return f'Speed of {self.name} is higher than allow for work car'
+
+
+class PoliceCar(Car):
+    def __init__(self, speed, color, name, is_police):
+        super().__init__(speed, color, name, is_police)
+
+    def police(self):
+        if self.is_police:
+            return f'{self.name} is from police department'
+        else:
+            return f'{self.name} is not from police department'
+
+
+sport_car = SportCar(160, 'Red', 'Ferrari', False)
+town_car = TownCar(60, 'Gray', 'WV', False)
+worker_car = WorkCar(75, 'White', 'Lada', True)
+police_car = PoliceCar(120, 'Blue', 'Audi', True)
+print(worker_car.turn_left())
+print(f'After {town_car.turn_right()}, {sport_car.stop()}')
+print(f'{worker_car.go()} with speed {worker_car.show_speed()}')
+print(f'{worker_car.name} is {worker_car.color}')
+print(f'Is {sport_car.name} a police car? {sport_car.is_police}')
+print(f'Is {worker_car.name}  a police car? {worker_car.is_police}')
+print(sport_car.show_speed())
+print(town_car.show_speed())
+print(police_car.police())
+print(police_car.show_speed())
+
+# Task 6 _______________________________________
+class Stationery:
+
+    def __init__(self, title):
+        self.title = title
+
+    def draw(self):
+        print('Запуск отрисовки.')
+
+
+class Pen(Stationery):
+
+    def __init__(self):
+        super().__init__('Ручка')
+
+    def draw(self):
+        print(f'Запуск отрисовки. {self.title}')
+
+
+class Pencil(Stationery):
+
+    def __init__(self):
+        super().__init__('Карандаш')
+
+    def draw(self):
+        print(f'Запуск отрисовки. {self.title}')
+
+
+class Handle(Stationery):
+
+    def __init__(self):
+        super().__init__('Маркер')
+
+    def draw(self):
+        print(f'Запуск отрисовки. {self.title}')
+
+
+if __name__ == '__main__':
+    p = Pen()
+    n = Pencil()
+    h = Handle()
+    s = Stationery('канцелярская принадлежность')
+
+    p.draw()
+    n.draw()
+    h.draw()
+    s.draw()
