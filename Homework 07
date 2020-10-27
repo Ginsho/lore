@@ -1,0 +1,113 @@
+# Task 1 __________________________________
+class Matrix:
+    def __init__(self, matrix_list_1, matrix_list_2):
+        self.matrix_list_1 = matrix_list_1
+        self.matrix_list_2 = matrix_list_2
+
+    def __add__(self):
+        matrix = [[0, 0, 0],
+                  [0, 0, 0],
+                  [0, 0, 0]]
+
+        for i in range(len(self.matrix_list_1)):
+
+            for j in range(len(self.matrix_list_2[i])):
+                matrix[i][j] = self.matrix_list_1[i][j] + self.matrix_list_2[i][j]
+
+        return str('\n'.join(['\t'.join([str(j) for j in i]) for i in matrix]))
+
+
+sum_matrix = Matrix([[6125, 14218, 11241],
+                     [146, 591, 673],
+                     [15, 51, 51]],
+                    [[9765, 6798, 7872],
+                    [346, 637, 593],
+                    [24, 65, 97]])
+
+
+print(sum_matrix.__add__())
+
+# Task 2 __________________________________
+class clothes:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def get_square_c(self):
+        return self.width / 6.5 + 0.5
+
+    def get_square_j(self):
+        return self.height * 2 + 0.3
+
+    @property
+    def get_sq_full(self):
+        return str(f'Total fabric footage:\n'
+                   f' {(self.width / 6.5 + 0.5) + (self.height * 2 + 0.3)}')
+
+
+class Coat(clothes):
+    def __init__(self, width, height):
+        super().__init__(width, height)
+        self.square_c = round(self.width / 6.5 + 0.5)
+
+    def __str__(self):
+        return f'Meters of fabrics spent on coat: {self.square_c}'
+
+
+class Suite(clothes):
+    def __init__(self, width, height):
+        super().__init__(width, height)
+        self.square_j = round(self.height * 2 + 0.3)
+
+    def __str__(self):
+        return f'Meters of fabrics spent on suit: {self.square_j}'
+
+coat = Coat(2, 4)
+suite = Suite(1, 2)
+print(coat)
+print(suite)
+print(coat.get_sq_full)
+print(suite.get_sq_full)
+print(suite.get_square_c())
+print(suite.get_square_j())
+
+# Task 3 __________________________________
+class Cell:
+    def __init__(self, quantity):
+        self.quantity = int(quantity)
+
+    def __str__(self):
+        return f'Operation result {self.quantity * "*"}'
+
+    def __add__(self, other):
+
+        return Cell(self.quantity + other.quantity)
+
+    def __sub__(self, other):
+
+        return self.quantity - other.quantity if (self.quantity - other.quantity) > 0 else print('Negative!')
+
+    def __mul__(self, other):
+
+        return Cell(int(self.quantity * other.quantity))
+
+    def __truediv__(self, other):
+
+        return Cell(round(self.quantity // other.quantity))
+
+
+    def make_order(self, cells_in_row):
+        row = ''
+        for i in range(int(self.quantity / cells_in_row)):
+            row += f'{"*" * cells_in_row} \\n'
+        row += f'{"*" * (self.quantity % cells_in_row)}'
+        return row
+
+cells1 = Cell(15)
+cells2 = Cell(19)
+print(cells1)
+print(cells1 + cells2)
+print(cells2 - cells1)
+print(cells2.make_order(5))
+print(cells1.make_order(7))
+print(cells1 / cells2)
